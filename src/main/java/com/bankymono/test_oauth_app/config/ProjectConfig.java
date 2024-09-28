@@ -12,6 +12,9 @@ import org.springframework.security.oauth2.client.registration.InMemoryClientReg
 @Configuration
 public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
+    String clientId = System.getenv("GITHUB_CLIENT_ID");
+    String clientSecret = System.getenv("GITHUB_CLIENT_SECRET");
+
     @Bean
     public ClientRegistrationRepository clientRepository() {
         var c = clientRegistration();
@@ -20,8 +23,8 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     private ClientRegistration clientRegistration(){
         return CommonOAuth2Provider.GITHUB.getBuilder("github")
-                .clientId("Ov23lijncEo43263pPSg")
-                .clientSecret("373422279df6cf42fc5b5c313e07b7511dd2d0ac")
+                .clientId(clientId)
+                .clientSecret(clientSecret)
                 .build();
     }
 
